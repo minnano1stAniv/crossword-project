@@ -217,46 +217,22 @@ footer {
     margin: 0;    /* 余計な隙間を消す */
 }
 
-/* --- iPhone（iOS Safari）特有のレイアウト崩れを強制リセット --- */
+/* --- iPhone（iOS Safari）特有のレイアウト崩れと角丸を直す修正 --- */
 
-/* 1. すべてのマス関連要素のサイズ計算を「枠線込み」に統一 */
-.cell-wrapper, 
-.cell, 
-.key-cell, 
-.black-cell {
-    box-sizing: border-box;
-}
-
-/* 2. 入力欄（input）のSafari特有のバグを徹底的にブロック */
+/* 入力欄（通常マス・キーワードマス）のサイズを親の箱に完全一致させる */
 input.cell, 
 input.key-cell {
-    -webkit-appearance: none;
+    display: block !important;    /* ★重要：入力欄の下にできる謎の隙間を消す */
+    width: 100% !important;       /* 親の箱（ラッパー）の幅にピッタリ合わせる */
+    height: 100% !important;      /* 親の箱（ラッパー）の高さにピッタリ合わせる */
+    box-sizing: border-box !important; /* 枠線を含めてサイズ計算する */
+    margin: 0 !important;
+    padding: 0 !important;
+    -webkit-appearance: none;     /* Safariの標準デザインをオフにする */
     appearance: none;
-    margin: 0;
-    padding: 0;
-    min-width: 0;  /* ★超重要：Safariが勝手にマスを広げるのを防ぐ */
-    min-height: 0; /* ★超重要：同上 */
-    box-sizing: border-box;
-    font-family: inherit; /* フォントの違いによる微妙なズレを防止 */
-}
-
-/* 3. 通常のマスの角丸を完全に消す */
-input.cell {
-    border-radius: 0; 
-}
-
-/* 4. キーワードマスの角丸は維持（上書きされないように再指定） */
-input.key-cell {
-    border-radius: 5px;
-}
-
-/* 入力欄下のヒント文章 */
-.input-hint {
-    font-size: 14px;       /* 文字は少し小さめに */
-    color: #f24741;        /* 推しの赤で強調 */
-    font-weight: bold;     /* 太字で読みやすく */
-    margin-top: 5px;       /* 上（入力欄）との隙間 */
-    margin-bottom: 15px;   /* 下（ボタン）との隙間 */
+    border-radius: 5px !important; /* ★外れてしまった角丸を復活させる */
+    min-width: 0 !important;      /* スマホ画面で縮む時の抵抗をなくす */
+    min-height: 0 !important;
 }
 
 /* --- テーマ・作成者情報のデザイン --- */
