@@ -3,31 +3,27 @@ body {
     font-family: "Helvetica Neue", Arial, "Hiragino Kaku Gothic ProN", sans-serif;
     margin: 0;
     padding: 0;
-    background-color: #f9f9f9; /* 背景は目に優しい薄いグレー */
+    background-color: #f9f9f9;
     color: #333;
     text-align: center;
 }
 
 /* ヘッダー全体の調整 */
 header {
-    background-color: #362fec; /* 推しカラー（青）背景はそのまま */
-    padding: 10px;             /* 余白を少し調整 */
-    text-align: center;        /* 画像を真ん中に寄せる */
+    background-color: #362fec;
+    padding: 10px;
+    text-align: center;
 }
 
 /* ロゴ画像の調整 */
 .logo-img {
-    max-width: 100%; /* スマホからはみ出さないようにする */
-    height: auto;    /* 縦横比を崩さない */
-    
-    /* PCで見た時にデカすぎないように制限をかける */
-    width: 500px;    /* 基本の幅（お好みで変えてね） */
-    
-    vertical-align: bottom; /* 画像の下にできる謎の隙間を消すおまじない */
-    transition: 0.3s;       /* ホバー時の動きを滑らかに */
+    max-width: 100%;
+    height: auto;
+    width: 500px;
+    vertical-align: bottom;
+    transition: 0.3s;
 }
 
-/* マウスを乗せた時に少しふわっとさせる（リンクだとわかるように） */
 .logo-img:hover {
     opacity: 0.8;
 }
@@ -35,76 +31,119 @@ header {
 /* メインコンテンツの余白 */
 main {
     padding: 20px;
-    max-width: 600px; /* PCで見ても横に広がりすぎないように */
-    margin: 0 auto;   /* 中央寄せ */
+    max-width: 600px;
+    margin: 0 auto;
 }
 
 /* --- 万能クロスワード盤面 --- */
 .crossword-container {
     display: grid;
-    /* HTMLで指定した数(--n)の分だけマスを作る */
-    /* 指定がないときはデフォルトで「5」になる */
-    grid-template-columns: repeat(var(--n, 5), var(--size, 50px));
-    
-    gap: 2px; /* マスの隙間 */
-    justify-content: center; /* 真ん中寄せ */
+    /* 1マスの基本サイズを46pxに統一 */
+    grid-template-columns: repeat(var(--n, 5), var(--size, 46px));
+    grid-auto-rows: var(--size, 46px); /* 高さを明示的に指定 */
+    gap: 2px;
+    justify-content: center;
     margin: 20px auto;
 }
 
 /* --- 13マスなど、巨大パズル用の「縮小モード」 --- */
 .crossword-container.mini-mode {
-    /* マスを小さくしないとスマホに入りきらないので上書き */
-    --size: 30px; /* 1マスを30pxにする */
-}
-/* ミニモードのときは、中の文字も小さくする */
-.crossword-container.mini-mode .black-cell,
-.crossword-container.mini-mode .cell-wrapper {
-    width: 30px;
-    height: 30px;
-    font-size: 12px; /* 文字サイズも小さく */
+    --size: 30px; /* ミニモードは30pxに統一 */
 }
 
-.crossword-container.mini-mode .cell,
-.crossword-container.mini-mode .key-cell {
-    width: 24px;
-    height: 24px;
-    font-size: 12px; /* 文字サイズも小さく */
-}
-
-
-/* ミニモードのときは、左上の数字をもっと小さく */
-.crossword-container.mini-mode .cell-number {
-    font-size: 9px;
-    top: 0;
-    left: 1px;
-    top: 2px;           /* 上から2px */
-    left: 2px;          /* 左から2px */
-}
-
-/* 1マスのデザイン */
-.cell {
-    width: 40px;
-    height: 40px;
-    font-size: 24px;
-    text-align: center;
-    border: 2px solid #362fec; /* 枠線は青 */
-    border-radius: 5px;
-    outline: none; /* 入力時の青枠を消す */
-}
-
-/* 入力しようとした時の色 */
-.cell:focus {
-    background-color: #eef; /* 薄い青背景 */
-    border-color: #f24741;  /* 枠線が赤に変わる */
+/* ★根本解決：すべてのマスのサイズ計算を「枠線込み」に統一！ */
+.black-cell, .cell-wrapper, input.cell, input.key-cell {
+    box-sizing: border-box !important;
 }
 
 /* 黒マスのデザイン */
 .black-cell {
     background-color: #333;
     color: #333;
-    width: 46px;
-    height: 46px;
+    width: 100%;  /* px指定をやめて枠にピッタリ合わせる */
+    height: 100%; 
     border-radius: 5px;
+}
+
+/* 文字と入力欄をまとめる箱 */
+.cell-wrapper {
+    position: relative;
+    width: 100%;
+    height: 100%;
+}
+
+/* 1マスのデザイン（通常マス） */
+input.cell {
+    width: 100% !important;
+    height: 100% !important;
+    font-size: 24px;
+    text-align: center;
+    border: 2px solid #362fec;
+    border-radius: 5px !important;
+    outline: none;
+    margin: 0 !important;
+    padding: 0 !important;
+    /* iPhone Safariバグ対策 */
+    -webkit-appearance: none;
+    appearance: none;
+    min-width: 0;
+    min-height: 0;
+    display: block;
+    font-family: inherit;
+}
+
+/* 1マスのデザイン（キーワードマス） */
+input.key-cell {
+    width: 100% !important;
+    height: 100% !important;
+    font-size: 24px;
+    text-align: center;
+    background-color: #ffe0e0;
+    border: 2px solid #f24741;
+    color: #f24741;
+    font-weight: bold;
+    border-radius: 5px !important;
+    outline: none;
+    margin: 0 !important;
+    padding: 0 !important;
+    /* iPhone Safariバグ対策 */
+    -webkit-appearance: none;
+    appearance: none;
+    min-width: 0;
+    min-height: 0;
+    display: block;
+    font-family: inherit;
+}
+
+/* 入力しようとした時の色 */
+input.cell:focus, input.key-cell:focus {
+    background-color: #eef;
+    border-color: #f24741;
+}
+
+/* ミニモードの時の入力文字サイズ */
+.crossword-container.mini-mode input.cell,
+.crossword-container.mini-mode input.key-cell {
+    font-size: 14px;
+}
+
+/* 左上の小さな数字 */
+.cell-number {
+    position: absolute;
+    top: 2px;
+    left: 3px;
+    font-size: 10px;
+    color: #333;
+    font-weight: bold;
+    pointer-events: none;
+    z-index: 10;
+}
+
+/* ミニモードのときは、左上の数字をもっと小さく */
+.crossword-container.mini-mode .cell-number {
+    font-size: 9px;
+    top: 1px;
+    left: 2px;
 }
 
 /* 答え入力エリアのデザイン */
@@ -124,7 +163,7 @@ main {
 }
 
 button {
-    background-color: #f24741; /* 推しカラー（赤） */
+    background-color: #f24741;
     color: white;
     border: none;
     padding: 10px 20px;
@@ -135,7 +174,7 @@ button {
 }
 
 button:hover {
-    opacity: 0.8; /* マウスを乗せると少し透明に */
+    opacity: 0.8;
 }
 
 footer {
@@ -145,39 +184,25 @@ footer {
     color: #666;
 }
 
-/* キーワードになる重要なマス */
-.key-cell {
-    width: 40px;
-    height: 40px;
-    font-size: 24px;
-    text-align: center;
-    background-color: #ffe0e0; /* 薄い赤背景 */
-    border: 2px solid #f24741; /* 枠線を推しの赤に */
-    font-weight: bold;
-    color: #f24741;
-    border-radius: 5px;
-    outline: none; /* 入力時の青枠を消す */
-}
-
 /* カギのエリア全体 */
 .clues-container {
     display: flex;
-    justify-content: space-between; /* 左右に配置 */
+    justify-content: space-between;
     margin: 20px 0;
-    text-align: left; /* 文字は左揃え */
+    text-align: left;
 }
 
 /* 個別のカギボックス */
 .clue-box {
-    width: 48%; /* 半分より少し小さく */
+    width: 48%;
     background: white;
     padding: 15px;
     border-radius: 8px;
-    border: 2px solid #362fec; /* 青い枠 */
+    border: 2px solid #362fec;
 }
 
 .clue-box h3 {
-    color: #f24741; /* 赤い見出し */
+    color: #f24741;
     border-bottom: 2px solid #eee;
     padding-bottom: 5px;
     margin-top: 0;
@@ -191,123 +216,70 @@ footer {
     margin-bottom: 8px;
 }
 
-/* 数字と入力欄を重ねるための「箱」 */
-.cell-wrapper {
-    position: relative; /* ここを基準にします */
-    width: 40px;       /* マスのサイズに合わせる */
-    height: 40px;      /* マスのサイズに合わせる */
-}
-
-/* 左上の小さな数字 */
-.cell-number {
-    position: absolute; /* 自由な位置に置く指定 */
-    top: 2px;           /* 上から2px */
-    left: 4px;          /* 左から4px */
-    font-size: 10px;    /* 文字は小さく */
-    color: #333;     /*黒に変更 */
-    font-weight: bold;
-    pointer-events: none; /* 数字をクリックしても入力の邪魔にならないようにする魔法 */
-    z-index: 10;        /* 入力欄より手前に表示 */
-}
-
-/* 箱の中に入った入力欄の調整 */
-.cell-wrapper .cell {
-    width: 100%;  /* 箱いっぱいに広げる */
-    height: 100%; /* 箱いっぱいに広げる */
-    margin: 0;    /* 余計な隙間を消す */
-}
-
-/* --- iPhone（iOS Safari）特有のレイアウト崩れと角丸を直す修正 --- */
-
-/* 入力欄（通常マス・キーワードマス）のサイズを親の箱に完全一致させる */
-input.cell, 
-input.key-cell {
-    display: block !important;    /* ★重要：入力欄の下にできる謎の隙間を消す */
-    width: 100% !important;       /* 親の箱（ラッパー）の幅にピッタリ合わせる */
-    height: 100% !important;      /* 親の箱（ラッパー）の高さにピッタリ合わせる */
-    box-sizing: border-box !important; /* 枠線を含めてサイズ計算する */
-    margin: 0 !important;
-    padding: 0 !important;
-    -webkit-appearance: none;     /* Safariの標準デザインをオフにする */
-    appearance: none;
-    border-radius: 5px !important; /* ★外れてしまった角丸を復活させる */
-    min-width: 0 !important;      /* スマホ画面で縮む時の抵抗をなくす */
-    min-height: 0 !important;
-}
-
 /* --- テーマ・作成者情報のデザイン --- */
 .stage-info {
-    background-color: white;       /* 背景は白 */
-    border-left: 6px solid #f24741; /* 左端に推し赤のアクセント線 */
-    padding: 15px 20px;            /* 内側の余白 */
-    margin-bottom: 20px;           /* 下との隙間 */
-    border-radius: 5px;            /* 角を少し丸く */
-    box-shadow: 0 2px 5px rgba(0,0,0,0.1); /* 軽く影をつける */
-    text-align: left;              /* 左揃えで見やすく */
+    background-color: white;
+    border-left: 6px solid #f24741;
+    padding: 15px 20px;
+    margin-bottom: 20px;
+    border-radius: 5px;
+    box-shadow: 0 2px 5px rgba(0,0,0,0.1);
+    text-align: left;
 }
 
-/* テーマの文字 */
 .theme-text {
     margin: 0;
     font-size: 18px;
-    color: #362fec; /* 推し青で知的に */
-    border-bottom: 1px dashed #ddd; /* 下に点線 */
+    color: #362fec;
+    border-bottom: 1px dashed #ddd;
     padding-bottom: 5px;
 }
 
-/* 作成者の文字 */
 .creator-text {
-    margin: 8px 0 0 0; /* 上に少し隙間 */
+    margin: 8px 0 0 0;
     font-size: 14px;
     color: #555;
-    text-align: right; /* 右寄せにして署名っぽく */
+    text-align: right;
     font-weight: bold;
 }
 
-
 /* --- ギャラリー用のスタイル --- */
-
-/* サムネイルを横並びにする */
 .gallery-container {
     display: flex;
     justify-content: center;
     gap: 15px;
-    flex-wrap: wrap; /* スマホで縦に並ぶように */
+    flex-wrap: wrap;
     margin: 20px 0;
 }
 
-/* 小さい画像の見た目（修正版） */
 .thumbnail {
-    width: 150px;       /* 横幅 */
-    height: 150px;      /* 縦幅（正方形にする） */
-    object-fit: cover;  /* ★魔法の呪文！画像を歪ませずに枠いっぱいに表示する */
-    border-radius: 50%; /* ★これでまん丸になります（四角がいいならこの行を消す） */
-    
+    width: 150px;
+    height: 150px;
+    object-fit: cover;
+    border-radius: 50%;
     border: 3px solid #fff;
     box-shadow: 0 2px 5px rgba(0,0,0,0.3);
     cursor: pointer;
     transition: 0.3s;
 }
 
-/* 次へ・前へボタンのデザイン（追加） */
 .prev, .next {
     cursor: pointer;
     position: absolute;
     top: 50%;
     width: auto;
     padding: 16px;
-    margin-top: -50px; /* 真ん中に配置 */
+    margin-top: -50px;
     color: white;
     font-weight: bold;
     font-size: 30px;
     transition: 0.6s ease;
     user-select: none;
-    background-color: rgba(0,0,0,0.3); /* 背景を少し暗く */
+    background-color: rgba(0,0,0,0.3);
     border-radius: 3px;
-    z-index: 101; /* 画像より手前に */
+    z-index: 101;
 }
 
-/* ボタンの位置 */
 .next {
     right: 0;
     border-radius: 3px 0 0 3px;
@@ -317,39 +289,35 @@ input.key-cell {
     border-radius: 0 3px 3px 0;
 }
 
-/* マウスを乗せた時 */
 .prev:hover, .next:hover {
     background-color: rgba(0,0,0,0.8);
 }
 
 .thumbnail:hover {
-    transform: scale(1.05); /* マウスを乗せると少し浮く */
-    border-color: #f24741;  /* 枠が推し色になる */
+    transform: scale(1.05);
+    border-color: #f24741;
 }
 
 /* --- 拡大表示（モーダル）のスタイル --- */
 .modal {
-    display: none; /* 最初は隠しておく */
+    display: none;
     position: fixed;
-    z-index: 100; /* 最前面に */
+    z-index: 100;
     left: 0;
     top: 0;
     width: 100%;
     height: 100%;
-    background-color: rgba(0,0,0,0.8); /* 背景を半透明の黒に */
+    background-color: rgba(0,0,0,0.8);
 }
 
-/* 拡大された画像 */
 .modal-content {
-    /* 上は5%、左右は自動、下は10px（ここを狭くしました！） */
     margin: 5% auto 10px auto;
     display: block;
     max-width: 90%;
-    max-height: 80vh; /* 画面からはみ出さないように */
+    max-height: 80vh;
     border: 5px solid white;
 }
 
-/* 閉じるボタン */
 .close-btn {
     position: absolute;
     top: 20px;
@@ -360,39 +328,31 @@ input.key-cell {
     cursor: pointer;
 }
 
-/* 拡大画像の下に出る名前（キャプション） */
 #caption {
-    margin: 0 auto; /* 上下の隙間をゼロにする */
-    margin-top: 0;  /* 念のため、上を詰めると明示する */
-    
+    margin: 0 auto;
+    margin-top: 0;
     display: block;
     width: 80%;
     max-width: 700px;
     text-align: center;
     color: white;
-    /* padding: 10px 0; ←これを削除するか、下のように書き換えてください */
-    padding-bottom: 10px; /* 下の余白だけ残す */
-    
-    /* ...他の設定（font-sizeなど）はそのまま... */
+    padding-bottom: 10px;
 }
 
 /* --- トップページ専用デザイン --- */
-
-/* 全体の配置を整える */
 .top-page {
     max-width: 700px;
     margin: 0 auto;
     padding: 20px;
 }
 
-/* ストーリーの箱 */
 .story-box {
     background-color: #fff;
-    border: 4px double #f24741; /* 推し赤の二重線 */
+    border: 4px double #f24741;
     padding: 20px;
     border-radius: 10px;
     margin-bottom: 30px;
-    line-height: 1.8; /* 行間を広げて読みやすく */
+    line-height: 1.8;
 }
 
 .story-box h2 {
@@ -402,12 +362,11 @@ input.key-cell {
     margin-top: 0;
 }
 
-/* ルールの箱 */
 .rule-box {
-    background-color: #f0f4ff; /* 薄い青背景 */
+    background-color: #f0f4ff;
     padding: 20px;
     border-radius: 10px;
-    border-left: 6px solid #362fec; /* 推し青の線 */
+    border-left: 6px solid #362fec;
     text-align: left;
     margin-bottom: 40px;
 }
@@ -425,23 +384,21 @@ input.key-cell {
     margin-bottom: 8px;
 }
 
-/* スタートボタン（超目立たせる！） */
 .start-btn {
     display: inline-block;
     background-color: #f24741;
     color: white;
-    text-decoration: none; /* 下線を消す */
+    text-decoration: none;
     font-size: 24px;
     font-weight: bold;
     padding: 20px 60px;
-    border-radius: 50px; /* 丸っこく */
-    box-shadow: 0 5px 0 #c0392b; /* 立体的な影 */
+    border-radius: 50px;
+    box-shadow: 0 5px 0 #c0392b;
     transition: 0.2s;
 }
 
-/* ボタンを押した時の動き */
 .start-btn:active {
-    box-shadow: 0 0 0 #c0392b; /* 影をなくして沈むように見せる */
+    box-shadow: 0 0 0 #c0392b;
     transform: translateY(5px);
 }
 
@@ -469,31 +426,20 @@ input.key-cell {
     border-radius: 5px;
     cursor: pointer;
     transition: 0.3s;
-    text-decoration: none; /* リンクの下線を消す */
+    text-decoration: none;
 }
 
-/* Xボタン（黒） */
-.x-btn {
-    background-color: #000;
-}
-.x-btn:hover {
-    background-color: #333;
-}
-
-/* コピーボタン（グレー） */
-.copy-btn {
-    background-color: #777;
-}
-.copy-btn:hover {
-    background-color: #555;
-}
+.x-btn { background-color: #000; }
+.x-btn:hover { background-color: #333; }
+.copy-btn { background-color: #777; }
+.copy-btn:hover { background-color: #555; }
 
 /* --- クレジットエリアのデザイン --- */
 .credits-area {
     margin: 40px auto;
     padding: 20px;
     text-align: center;
-    background-color: #f9f9f9; /* 背景を少しだけグレーにして区切る */
+    background-color: #f9f9f9;
     border-radius: 10px;
     max-width: 500px;
 }
@@ -503,7 +449,7 @@ input.key-cell {
     color: #555;
     font-size: 18px;
     margin-bottom: 15px;
-    letter-spacing: 2px; /* 文字の間隔を少し広げて見栄え良く */
+    letter-spacing: 2px;
 }
 
 .credits-area p {
@@ -512,7 +458,6 @@ input.key-cell {
     color: #333;
 }
 
-/* 役割（企画主催など）の文字だけ少し小さく・薄くする */
 .credit-role {
     font-size: 13px;
     color: #777;
