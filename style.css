@@ -224,6 +224,28 @@ footer {
     margin-bottom: 8px;
 }
 
+/* --- iPhone 12などの幅が狭いスマホ向けの最終調整 --- */
+@media (max-width: 420px) {
+    /* 13マスの横幅(約414px)を画面幅(390px以下)に収めるため、1マスを26pxに縮小 */
+    .crossword-container.mini-mode {
+        --size: 26px;
+        gap: 1px; /* 隙間も少し詰めて、横幅を節約する */
+    }
+
+    /* マスが小さくなるので、中の文字サイズも微調整 */
+    .crossword-container.mini-mode input.cell,
+    .crossword-container.mini-mode input.key-cell {
+        font-size: 13px;
+    }
+
+    /* 左上の数字が重ならないよう、さらに小さく配置を整える */
+    .crossword-container.mini-mode .cell-number {
+        font-size: 7px;
+        top: 0px;
+        left: 1px;
+    }
+}
+
 /* --- テーマ・作成者情報のデザイン --- */
 .stage-info {
     background-color: white;
