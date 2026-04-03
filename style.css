@@ -478,3 +478,34 @@ footer {
 .copy-btn:hover {
     background-color: #555;
 }
+
+/* --- クレジットエリアのデザイン --- */
+.credits-area {
+    margin: 40px auto;
+    padding: 20px;
+    text-align: center;
+    background-color: #f9f9f9; /* 背景を少しだけグレーにして区切る */
+    border-radius: 10px;
+    max-width: 500px;
+}
+
+.credits-area h3 {
+    margin-top: 0;
+    color: #555;
+    font-size: 18px;
+    margin-bottom: 15px;
+    letter-spacing: 2px; /* 文字の間隔を少し広げて見栄え良く */
+}
+
+.credits-area p {
+    margin: 10px 0;
+    font-size: 15px;
+    color: #333;
+}
+
+/* 役割（企画主催など）の文字だけ少し小さく・薄くする */
+.credit-role {
+    font-size: 13px;
+    color: #777;
+    margin-right: 5px;
+}
