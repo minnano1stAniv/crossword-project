@@ -77,10 +77,10 @@ function showImage() {
 /* --- SNSシェア機能 --- */
 
 // ★公開したら、ここを「あなたのサイトのURL」に書き換えてください！
-const siteUrl = "https://example.com"; 
+const siteUrl = "https://minnano1staniv.github.io/crossword-project/index.html"; 
 
 // ★シェアされた時の文章（ハッシュタグもここに書く）
-const shareText = "クロスワードを解いて、1周年記念プレゼントを救出しました！🗝️✨ #解問ハテナ1周年 #ミンナノ1stAnniversary";
+const shareText = "クロスワードを解いて、1周年記念プレゼントを救出しました！🗝️✨ #ミンナノ1stAnniversary";
 
 // 1. X（Twitter）にポストする機能
 function shareToX() {
