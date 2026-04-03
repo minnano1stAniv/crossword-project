@@ -1,0 +1,91 @@
+<!DOCTYPE html>
+<html lang="ja">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>1st Anniversary Mission</title>
+<link rel="stylesheet" href="style.css">
+
+    <style>
+        /* 画面全体（body）の設定 */
+        body {
+            /* 1. 背景色は白（ご自身で変更された `#fff` を指定） */
+            background-color: #fff; 
+            
+            /* 2. 画像の場所を指定 */
+            background-image: url('images/top-bg.png'); 
+            
+            /* 3. ★重要：画像を繰り返さない（1枚だけ表示） */
+            background-repeat: no-repeat;
+            
+            /* 4. ★重要：画像の位置を「右下」にする */
+            /* （"right bottom" で右下隅にピタッとくっつきます） */
+            background-position: right 20px bottom 100px;
+            
+            /* 5. ★重要：画像のサイズを調整する */
+            /* "contain" にすると、画像全体が画面内に収まるように自動縮小されます。
+               もしそれでも大きい場合は、下のコメントアウトを外して数字で指定してください */
+            background-size: contain; 
+            background-size: 400px; /* 例：横幅300pxにする */
+            
+            /* 6. ★重要：スクロールした時に画像も一緒に動かす */
+            /* （前回は `fixed` でしたが、右下配置の場合は動かした方が自然です） */
+            background-attachment: scroll; 
+        }
+
+        /* 文字を読みやすくするための調整（前回と同じですが、念のため） */
+        .story-box, .rule-box {
+            /* 白背景を少し透明にして、後ろのイラストに重なった時もおしゃれに見せる */
+            background-color: rgba(255, 255, 255, 0.95) !important; 
+            box-shadow: 0 4px 15px rgba(0,0,0,0.1); /* 影をつけて浮かせるとさらに読みやすい */
+        }
+    </style>
+</head>
+<body>
+
+    <header>
+    <div class="header-content">
+        <img src="images/logo.png" alt="ミンナノ1st Anniversary" class="logo-img">
+    </div>
+    </header>
+
+    <main class="top-page">
+        <div class="story-box">
+            <h2>🎉 1周年記念プレゼント救出大作戦 🎉</h2>
+            <p>
+                大変です！<br>
+                ハテナくんの1周年を記念したプレゼントを用意していたのですが、<br>
+                ちょっとした手違いで<strong>「堅牢なセキュリティボックス」</strong>に鍵がかかってしまいました。
+            </p>
+            <p>
+                鍵を開けるには、いくつかのクロスワードパズルを解いて<br>
+                パスワードを入手しなければなりません。
+            </p>
+            <p>
+                どうかあなたの知恵で、<br>
+                プレゼントを無事に救出してください！
+            </p>
+        </div>
+
+        <div class="rule-box">
+            <h3>📜 プレイのルール</h3>
+            <ul>
+                <li>マスをタップして文字を入力してください。</li>
+                <li>入力は<strong>「ひらがな」</strong>で行ってください。</li>
+                <li>小さい文字（っ、ゃ、ゅ、ょ）は、大きい文字（つ、や、ゆ、よ）で入力しても正解になります。</li>
+                <li>すべての謎を解くと、最後に何かが待っているかも…？</li>
+            </ul>
+        </div>
+
+        <div class="start-area">
+            <a href="stage05_3.html" class="start-btn">ミッションスタート！</a>
+        </div>
+
+    </main>
+
+    <footer>
+        <small>© ミンナノ1st anniversary</small>
+    </footer>
+
+</body>
+</html>
