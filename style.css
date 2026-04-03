@@ -146,6 +146,14 @@ input.cell:focus, input.key-cell:focus {
     left: 2px;
 }
 
+/* --- Android Chromeでの「数字付きマス」縮小バグ回避 --- */
+.cell-wrapper input.cell, 
+.cell-wrapper input.key-cell {
+    position: absolute !important;
+    top: 0;
+    left: 0;
+}
+
 /* 答え入力エリアのデザイン */
 .answer-section {
     background-color: white;
