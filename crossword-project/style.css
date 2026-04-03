@@ -1,0 +1,480 @@
+/* 全体のリセットと基本設定 */
+body {
+    font-family: "Helvetica Neue", Arial, "Hiragino Kaku Gothic ProN", sans-serif;
+    margin: 0;
+    padding: 0;
+    background-color: #f9f9f9; /* 背景は目に優しい薄いグレー */
+    color: #333;
+    text-align: center;
+}
+
+/* ヘッダー全体の調整 */
+header {
+    background-color: #362fec; /* 推しカラー（青）背景はそのまま */
+    padding: 10px;             /* 余白を少し調整 */
+    text-align: center;        /* 画像を真ん中に寄せる */
+}
+
+/* ロゴ画像の調整 */
+.logo-img {
+    max-width: 100%; /* スマホからはみ出さないようにする */
+    height: auto;    /* 縦横比を崩さない */
+    
+    /* PCで見た時にデカすぎないように制限をかける */
+    width: 500px;    /* 基本の幅（お好みで変えてね） */
+    
+    vertical-align: bottom; /* 画像の下にできる謎の隙間を消すおまじない */
+    transition: 0.3s;       /* ホバー時の動きを滑らかに */
+}
+
+/* マウスを乗せた時に少しふわっとさせる（リンクだとわかるように） */
+.logo-img:hover {
+    opacity: 0.8;
+}
+
+/* メインコンテンツの余白 */
+main {
+    padding: 20px;
+    max-width: 600px; /* PCで見ても横に広がりすぎないように */
+    margin: 0 auto;   /* 中央寄せ */
+}
+
+/* --- 万能クロスワード盤面 --- */
+.crossword-container {
+    display: grid;
+    /* HTMLで指定した数(--n)の分だけマスを作る */
+    /* 指定がないときはデフォルトで「5」になる */
+    grid-template-columns: repeat(var(--n, 5), var(--size, 50px));
+    
+    gap: 2px; /* マスの隙間 */
+    justify-content: center; /* 真ん中寄せ */
+    margin: 20px auto;
+}
+
+/* --- 13マスなど、巨大パズル用の「縮小モード」 --- */
+.crossword-container.mini-mode {
+    /* マスを小さくしないとスマホに入りきらないので上書き */
+    --size: 30px; /* 1マスを30pxにする */
+}
+/* ミニモードのときは、中の文字も小さくする */
+.crossword-container.mini-mode .black-cell,
+.crossword-container.mini-mode .cell-wrapper {
+    width: 30px;
+    height: 30px;
+    font-size: 12px; /* 文字サイズも小さく */
+}
+
+.crossword-container.mini-mode .cell,
+.crossword-container.mini-mode .key-cell {
+    width: 24px;
+    height: 24px;
+    font-size: 12px; /* 文字サイズも小さく */
+}
+
+
+/* ミニモードのときは、左上の数字をもっと小さく */
+.crossword-container.mini-mode .cell-number {
+    font-size: 9px;
+    top: 0;
+    left: 1px;
+    top: 2px;           /* 上から2px */
+    left: 2px;          /* 左から2px */
+}
+
+/* 1マスのデザイン */
+.cell {
+    width: 40px;
+    height: 40px;
+    font-size: 24px;
+    text-align: center;
+    border: 2px solid #362fec; /* 枠線は青 */
+    border-radius: 5px;
+    outline: none; /* 入力時の青枠を消す */
+}
+
+/* 入力しようとした時の色 */
+.cell:focus {
+    background-color: #eef; /* 薄い青背景 */
+    border-color: #f24741;  /* 枠線が赤に変わる */
+}
+
+/* 黒マスのデザイン */
+.black-cell {
+    background-color: #333;
+    color: #333;
+    width: 46px;
+    height: 46px;
+    border-radius: 5px;
+}
+
+/* 答え入力エリアのデザイン */
+.answer-section {
+    background-color: white;
+    padding: 20px;
+    border-radius: 10px;
+    box-shadow: 0 4px 10px rgba(0,0,0,0.1);
+}
+
+#user-password {
+    padding: 10px;
+    font-size: 16px;
+    width: 60%;
+    border: 2px solid #ccc;
+    border-radius: 5px;
+}
+
+button {
+    background-color: #f24741; /* 推しカラー（赤） */
+    color: white;
+    border: none;
+    padding: 10px 20px;
+    font-size: 16px;
+    border-radius: 5px;
+    cursor: pointer;
+    font-weight: bold;
+}
+
+button:hover {
+    opacity: 0.8; /* マウスを乗せると少し透明に */
+}
+
+footer {
+    margin-top: 50px;
+    padding: 10px;
+    background-color: #eee;
+    color: #666;
+}
+
+/* キーワードになる重要なマス */
+.key-cell {
+    width: 40px;
+    height: 40px;
+    font-size: 24px;
+    text-align: center;
+    background-color: #ffe0e0; /* 薄い赤背景 */
+    border: 2px solid #f24741; /* 枠線を推しの赤に */
+    font-weight: bold;
+    color: #f24741;
+    border-radius: 5px;
+    outline: none; /* 入力時の青枠を消す */
+}
+
+/* カギのエリア全体 */
+.clues-container {
+    display: flex;
+    justify-content: space-between; /* 左右に配置 */
+    margin: 20px 0;
+    text-align: left; /* 文字は左揃え */
+}
+
+/* 個別のカギボックス */
+.clue-box {
+    width: 48%; /* 半分より少し小さく */
+    background: white;
+    padding: 15px;
+    border-radius: 8px;
+    border: 2px solid #362fec; /* 青い枠 */
+}
+
+.clue-box h3 {
+    color: #f24741; /* 赤い見出し */
+    border-bottom: 2px solid #eee;
+    padding-bottom: 5px;
+    margin-top: 0;
+}
+
+.clue-box ul {
+    padding-left: 20px;
+}
+
+.clue-box li {
+    margin-bottom: 8px;
+}
+
+/* 数字と入力欄を重ねるための「箱」 */
+.cell-wrapper {
+    position: relative; /* ここを基準にします */
+    width: 40px;       /* マスのサイズに合わせる */
+    height: 40px;      /* マスのサイズに合わせる */
+}
+
+/* 左上の小さな数字 */
+.cell-number {
+    position: absolute; /* 自由な位置に置く指定 */
+    top: 2px;           /* 上から2px */
+    left: 4px;          /* 左から4px */
+    font-size: 10px;    /* 文字は小さく */
+    color: #333;     /*黒に変更 */
+    font-weight: bold;
+    pointer-events: none; /* 数字をクリックしても入力の邪魔にならないようにする魔法 */
+    z-index: 10;        /* 入力欄より手前に表示 */
+}
+
+/* 箱の中に入った入力欄の調整 */
+.cell-wrapper .cell {
+    width: 100%;  /* 箱いっぱいに広げる */
+    height: 100%; /* 箱いっぱいに広げる */
+    margin: 0;    /* 余計な隙間を消す */
+}
+
+/* 入力欄下のヒント文章 */
+.input-hint {
+    font-size: 14px;       /* 文字は少し小さめに */
+    color: #f24741;        /* 推しの赤で強調 */
+    font-weight: bold;     /* 太字で読みやすく */
+    margin-top: 5px;       /* 上（入力欄）との隙間 */
+    margin-bottom: 15px;   /* 下（ボタン）との隙間 */
+}
+
+/* --- テーマ・作成者情報のデザイン --- */
+.stage-info {
+    background-color: white;       /* 背景は白 */
+    border-left: 6px solid #f24741; /* 左端に推し赤のアクセント線 */
+    padding: 15px 20px;            /* 内側の余白 */
+    margin-bottom: 20px;           /* 下との隙間 */
+    border-radius: 5px;            /* 角を少し丸く */
+    box-shadow: 0 2px 5px rgba(0,0,0,0.1); /* 軽く影をつける */
+    text-align: left;              /* 左揃えで見やすく */
+}
+
+/* テーマの文字 */
+.theme-text {
+    margin: 0;
+    font-size: 18px;
+    color: #362fec; /* 推し青で知的に */
+    border-bottom: 1px dashed #ddd; /* 下に点線 */
+    padding-bottom: 5px;
+}
+
+/* 作成者の文字 */
+.creator-text {
+    margin: 8px 0 0 0; /* 上に少し隙間 */
+    font-size: 14px;
+    color: #555;
+    text-align: right; /* 右寄せにして署名っぽく */
+    font-weight: bold;
+}
+
+
+/* --- ギャラリー用のスタイル --- */
+
+/* サムネイルを横並びにする */
+.gallery-container {
+    display: flex;
+    justify-content: center;
+    gap: 15px;
+    flex-wrap: wrap; /* スマホで縦に並ぶように */
+    margin: 20px 0;
+}
+
+/* 小さい画像の見た目（修正版） */
+.thumbnail {
+    width: 150px;       /* 横幅 */
+    height: 150px;      /* 縦幅（正方形にする） */
+    object-fit: cover;  /* ★魔法の呪文！画像を歪ませずに枠いっぱいに表示する */
+    border-radius: 50%; /* ★これでまん丸になります（四角がいいならこの行を消す） */
+    
+    border: 3px solid #fff;
+    box-shadow: 0 2px 5px rgba(0,0,0,0.3);
+    cursor: pointer;
+    transition: 0.3s;
+}
+
+/* 次へ・前へボタンのデザイン（追加） */
+.prev, .next {
+    cursor: pointer;
+    position: absolute;
+    top: 50%;
+    width: auto;
+    padding: 16px;
+    margin-top: -50px; /* 真ん中に配置 */
+    color: white;
+    font-weight: bold;
+    font-size: 30px;
+    transition: 0.6s ease;
+    user-select: none;
+    background-color: rgba(0,0,0,0.3); /* 背景を少し暗く */
+    border-radius: 3px;
+    z-index: 101; /* 画像より手前に */
+}
+
+/* ボタンの位置 */
+.next {
+    right: 0;
+    border-radius: 3px 0 0 3px;
+}
+.prev {
+    left: 0;
+    border-radius: 0 3px 3px 0;
+}
+
+/* マウスを乗せた時 */
+.prev:hover, .next:hover {
+    background-color: rgba(0,0,0,0.8);
+}
+
+.thumbnail:hover {
+    transform: scale(1.05); /* マウスを乗せると少し浮く */
+    border-color: #f24741;  /* 枠が推し色になる */
+}
+
+/* --- 拡大表示（モーダル）のスタイル --- */
+.modal {
+    display: none; /* 最初は隠しておく */
+    position: fixed;
+    z-index: 100; /* 最前面に */
+    left: 0;
+    top: 0;
+    width: 100%;
+    height: 100%;
+    background-color: rgba(0,0,0,0.8); /* 背景を半透明の黒に */
+}
+
+/* 拡大された画像 */
+.modal-content {
+    /* 上は5%、左右は自動、下は10px（ここを狭くしました！） */
+    margin: 5% auto 10px auto;
+    display: block;
+    max-width: 90%;
+    max-height: 80vh; /* 画面からはみ出さないように */
+    border: 5px solid white;
+}
+
+/* 閉じるボタン */
+.close-btn {
+    position: absolute;
+    top: 20px;
+    right: 35px;
+    color: white;
+    font-size: 40px;
+    font-weight: bold;
+    cursor: pointer;
+}
+
+/* 拡大画像の下に出る名前（キャプション） */
+#caption {
+    margin: 0 auto; /* 上下の隙間をゼロにする */
+    margin-top: 0;  /* 念のため、上を詰めると明示する */
+    
+    display: block;
+    width: 80%;
+    max-width: 700px;
+    text-align: center;
+    color: white;
+    /* padding: 10px 0; ←これを削除するか、下のように書き換えてください */
+    padding-bottom: 10px; /* 下の余白だけ残す */
+    
+    /* ...他の設定（font-sizeなど）はそのまま... */
+}
+
+/* --- トップページ専用デザイン --- */
+
+/* 全体の配置を整える */
+.top-page {
+    max-width: 700px;
+    margin: 0 auto;
+    padding: 20px;
+}
+
+/* ストーリーの箱 */
+.story-box {
+    background-color: #fff;
+    border: 4px double #f24741; /* 推し赤の二重線 */
+    padding: 20px;
+    border-radius: 10px;
+    margin-bottom: 30px;
+    line-height: 1.8; /* 行間を広げて読みやすく */
+}
+
+.story-box h2 {
+    color: #f24741;
+    border-bottom: 2px solid #eee;
+    padding-bottom: 10px;
+    margin-top: 0;
+}
+
+/* ルールの箱 */
+.rule-box {
+    background-color: #f0f4ff; /* 薄い青背景 */
+    padding: 20px;
+    border-radius: 10px;
+    border-left: 6px solid #362fec; /* 推し青の線 */
+    text-align: left;
+    margin-bottom: 40px;
+}
+
+.rule-box h3 {
+    margin-top: 0;
+    color: #362fec;
+}
+
+.rule-box ul {
+    padding-left: 20px;
+}
+
+.rule-box li {
+    margin-bottom: 8px;
+}
+
+/* スタートボタン（超目立たせる！） */
+.start-btn {
+    display: inline-block;
+    background-color: #f24741;
+    color: white;
+    text-decoration: none; /* 下線を消す */
+    font-size: 24px;
+    font-weight: bold;
+    padding: 20px 60px;
+    border-radius: 50px; /* 丸っこく */
+    box-shadow: 0 5px 0 #c0392b; /* 立体的な影 */
+    transition: 0.2s;
+}
+
+/* ボタンを押した時の動き */
+.start-btn:active {
+    box-shadow: 0 0 0 #c0392b; /* 影をなくして沈むように見せる */
+    transform: translateY(5px);
+}
+
+.start-btn:hover {
+    opacity: 0.9;
+}
+
+/* --- シェアエリアのデザイン --- */
+.share-area {
+    margin: 40px auto;
+    padding: 20px;
+    background-color: #f9f9f9;
+    border-radius: 10px;
+    max-width: 500px;
+}
+
+.share-btn {
+    display: inline-block;
+    margin: 10px;
+    padding: 12px 24px;
+    font-size: 16px;
+    font-weight: bold;
+    color: white;
+    border: none;
+    border-radius: 5px;
+    cursor: pointer;
+    transition: 0.3s;
+    text-decoration: none; /* リンクの下線を消す */
+}
+
+/* Xボタン（黒） */
+.x-btn {
+    background-color: #000;
+}
+.x-btn:hover {
+    background-color: #333;
+}
+
+/* コピーボタン（グレー） */
+.copy-btn {
+    background-color: #777;
+}
+.copy-btn:hover {
+    background-color: #555;
+}

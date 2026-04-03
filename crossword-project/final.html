@@ -1,0 +1,94 @@
+<!DOCTYPE html>
+<html lang="ja">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Congratulations!</title>
+    <link rel="stylesheet" href="style.css">
+    <style>
+        /* このページだけの特別デザイン（画像用） */
+        .fanart-container {
+            margin: 30px auto;
+            max-width: 80%;
+            border: 5px solid #f24741; /* 推し赤の枠 */
+            padding: 10px;
+            background: white;
+        }
+        .fanart-container img {
+            width: 100%; /* 横幅いっぱいに表示 */
+            height: auto;
+        }
+    </style>
+</head>
+<body>
+
+    <header>
+    <div class="header-content">
+        <a href="index.html">
+            <img src="images/logo.png" alt="ミンナノ1st Anniversary" class="logo-img">
+        </a>
+    </div>
+    </header>
+
+<main>
+        <h2>Congratulations!</h2>
+        <p>すべての謎が解けました！</p>
+        <p>クリア記念ファンアートをお楽しみください。</p>
+
+        <div class="gallery-container">
+            <img src="images/art01.jpg" class="thumbnail" onclick="openModal(this)" data-author="玉木みか">
+    
+            <img src="images/art02.jpg" class="thumbnail" onclick="openModal(this)" data-author="ざくざくチョコレート">
+    
+            <img src="images/art03.jpg" class="thumbnail" onclick="openModal(this)" data-author="ざくざくチョコレート">
+
+            <img src="images/art04.png" class="thumbnail" onclick="openModal(this)" data-author="おおおなもみ">
+
+            <img src="images/art05.png" class="thumbnail" onclick="openModal(this)" data-author="合歓木">
+
+            <img src="images/art06.jpg" class="thumbnail" onclick="openModal(this)" data-author="はしもおこめ">
+
+            <img src="images/art07.jpeg" class="thumbnail" onclick="openModal(this)" data-author="カモ">
+
+            <img src="images/art08.png" class="thumbnail" onclick="openModal(this)" data-author="ちゃ">
+
+            <img src="images/art09.jpeg" class="thumbnail" onclick="openModal(this)" data-author="ふゆのこ">
+
+            <img src="images/art10.png" class="thumbnail" onclick="openModal(this)" data-author="どっぺる">
+
+
+        </div>
+
+        <div class="share-area">
+            <p>クリアの感動をシェアしよう！</p>
+            
+            <button class="share-btn x-btn" onclick="shareToX()">
+                𝕏 
+            </button>
+            
+            <button class="share-btn copy-btn" onclick="copyLink()">
+                🔗
+            </button>
+        </div>
+
+        <p><a href="index.html">最初に戻る</a></p>
+</main>
+
+    <div id="imageModal" class="modal">
+        <span class="close-btn" onclick="closeModal()">&times; 閉じる</span>
+        <a class="prev" onclick="changeImage(-1)">&#10094;</a>
+        <a class="next" onclick="changeImage(1)">&#10095;</a>
+        
+        <img class="modal-content" id="expandedImg">
+        
+        <div id="caption"></div>
+    </div>
+
+    <footer>
+        <small>© ミンナノ1st anniversary</small>
+    </footer>
+
+    <script src="script.js"></script>
+
+</body>
+</html>

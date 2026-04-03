@@ -1,0 +1,145 @@
+<!DOCTYPE html>
+<html lang="ja">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>クロスワード Challenge - Stage 1</title>
+    <link rel="stylesheet" href="style.css">
+</head>
+<body>
+
+    <header>
+    <div class="header-content">
+        <img src="images/logo.png" alt="ミンナノ1st Anniversary" class="logo-img">
+    </div>
+    </header>
+
+    <main>
+        <div class="stage-info">
+            <h2 class="theme-text">THEME：なぞなぞ</h2>
+            <p class="creator-text">作成：カモ</p>
+        </div>
+
+        <p>クロスワードを解いて、現れたキーワードを入力してください。</p>
+        
+        <div class="crossword-container" style="--n: 6">
+            
+            <div class="cell-wrapper">
+            <span class="cell-number">1A</span> <input type="text" maxlength="1" class="key-cell">
+            </div>
+            <span class="black-cell"></span>
+            <span class="black-cell"></span>
+            <span class="black-cell"></span>
+            <span class="black-cell"></span>
+            <span class="black-cell"></span>
+
+            <input type="text" maxlength="1" class="cell">
+            <span class="black-cell"></span>
+            <span class="black-cell"></span>
+            <div class="cell-wrapper">
+            <span class="cell-number">2</span> <input type="text" maxlength="1" class="cell">
+            </div>
+            <div class="cell-wrapper">
+            <span class="cell-number">B</span> <input type="text" maxlength="1" class="key-cell">
+            </div>
+            <span class="black-cell"></span>
+            
+            <div class="cell-wrapper">
+            <span class="cell-number">3</span> <input type="text" maxlength="1" class="cell">
+            </div>
+            <div class="cell-wrapper">
+            <span class="cell-number">C</span> <input type="text" maxlength="1" class="key-cell">
+            </div>
+            <input type="text" maxlength="1" class="cell">
+            <input type="text" maxlength="1" class="cell">
+            <span class="black-cell"></span>
+            <span class="black-cell"></span>
+
+            <input type="text" maxlength="1" class="cell">
+            <span class="black-cell"></span>
+            <span class="black-cell"></span>
+            <div class="cell-wrapper">
+            <span class="cell-number">4</span> <input type="text" maxlength="1" class="cell">
+            </div>
+            <div class="cell-wrapper">
+            <span class="cell-number">E</span> <input type="text" maxlength="1" class="key-cell">
+            </div>
+            <input type="text" maxlength="1" class="cell">
+            
+            <span class="black-cell"></span>
+            <div class="cell-wrapper">
+            <span class="cell-number">5</span> <input type="text" maxlength="1" class="cell">
+            </div>
+            <div class="cell-wrapper">
+            <span class="cell-number">6</span> <input type="text" maxlength="1" class="cell">
+            </div>
+            <input type="text" maxlength="1" class="cell">
+            <span class="black-cell"></span>
+            <span class="black-cell"></span>
+
+            <span class="black-cell"></span>
+            <span class="black-cell"></span>
+            <div class="cell-wrapper">
+            <span class="cell-number">7</span> <input type="text" maxlength="1" class="cell">
+            </div>
+            <input type="text" maxlength="1" class="cell">
+            <div class="cell-wrapper">
+            <span class="cell-number">D</span> <input type="text" maxlength="1" class="key-cell">
+            </div>
+            <span class="black-cell"></span>
+
+            <span class="black-cell"></span>
+            <span class="black-cell"></span>
+            <input type="text" maxlength="1" class="cell">
+            <span class="black-cell"></span>
+            <span class="black-cell"></span>
+            <span class="black-cell"></span>
+
+            <span class="black-cell"></span>
+            <span class="black-cell"></span>
+            <input type="text" maxlength="1" class="cell">
+            <span class="black-cell"></span>
+            <span class="black-cell"></span>
+            <span class="black-cell"></span>
+
+
+        </div>
+
+        <div class="clues-container">
+            <div class="clue-box">
+                <h3>タテのカギ</h3>
+                <ul>
+                    <li><strong>1.</strong> しゅんかとう　これはなーんだ？</li>
+                    <li><strong>2.</strong> ゆきたちを磨くとできるものはなーんだ？</li>
+                    <li><strong>6.</strong> TA&L　これが指すのはどういうこと？</li>
+                </ul>
+            </div>
+            <div class="clue-box">
+                <h3>ヨコのカギ</h3>
+                <ul>
+                    <li><strong>2.</strong> 一升瓶を10本集めると咲く花ってなーんだ？</li>
+                    <li><strong>3.</strong> 距離や身長を尋ねることが出来ない件はどーこだ？</li>
+                    <li><strong>4.</strong> 丼にWを入れて食べたらどうなった？</li>
+                    <li><strong>5.</strong> 本を印刷してみんなに見せる虫ってなーんだ？</li>
+                    <li><strong>7.</strong> 象とおそろいの衣装を着るぞ！「象○○○う」○○○に入る野菜ってなーんだ？</li>
+                </ul>
+            </div>
+        </div>
+
+<div class="answer-section">
+            <p>▼ キーワードを入力 ▼</p>
+            <input type="text" id="user-password" placeholder="ここにひらがなで答えを入力">
+            
+            <p class="input-hint">ABCDEを並べてできる言葉ってなーんだ？</p>
+            
+            <button onclick="checkAnswer('ありがとう', 'stage05_2.html')">決定</button>
+        </div>
+    </main>
+
+    <footer>
+        <small>© Fan Project 2026</small>
+    </footer>
+
+    <script src="script.js"></script>
+</body>
+</html>
