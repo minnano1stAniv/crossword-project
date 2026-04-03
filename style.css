@@ -217,6 +217,16 @@ footer {
     margin: 0;    /* 余計な隙間を消す */
 }
 
+/* iPhone（iOS Safari）特有の入力欄の自動デザインをリセット */
+input.cell {
+    -webkit-appearance: none; /* Safariのデフォルト装飾を消去 */
+    appearance: none;
+    border-radius: 0;         /* 勝手につく角丸を解除 */
+    padding: 0;               /* 内側の余白をリセット */
+    margin: 0;                /* 外側の余白をリセット */
+    box-sizing: border-box;   /* 枠線の太さをマスのサイズ内に収める */
+}
+
 /* 入力欄下のヒント文章 */
 .input-hint {
     font-size: 14px;       /* 文字は少し小さめに */
