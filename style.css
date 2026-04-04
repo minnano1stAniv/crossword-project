@@ -357,10 +357,10 @@ footer {
     top: 20px;
     right: 35px;
     color: white;
-    font-size: 20px;
+    font-size: 16px;
     font-weight: bold;
     cursor: pointer;
-    text-shadow: 1px 1px 0 #000, -1px -1px 0 #000, -1px 1px 0 #000, 1px -1px 0 #000;
+    text-shadow: 1px 1px 0 #394545, -1px -1px 0 #394545, -1px 1px 0 #000, 1px -1px 0 #394545;
 }
 
 #caption {
