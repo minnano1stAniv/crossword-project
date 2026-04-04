@@ -34,7 +34,7 @@ function openModal(element) {
     currentIndex = Array.from(thumbnails).indexOf(element);
 
     // 隠していた画面を表示する
-    modal.style.display = "block";
+    modal.style.display = "flex";
     
     // 画像を表示する
     showImage();
