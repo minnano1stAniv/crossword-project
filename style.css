@@ -338,17 +338,13 @@ footer {
     width: 100%;
     height: 100%;
     background-color: rgba(0,0,0,0.8);
-    flex-direction: column;
-    justify-content: center; /* 縦方向のど真ん中に配置 */
-    align-items: center;     /* 横方向のど真ん中に配置 */
 }
 
 .modal-content {
-    margin: 0 0 10px 0; /* 上の余白をなくし、下に10pxだけ余白を残す */
-    
+    margin: 60px auto 10px auto;
     display: block;
     max-width: 90%;
-    max-height: 75vh; /* 下の文字が隠れないよう、80vhから少し減らしておきます */
+    max-height: 75vh;
     border: 5px solid white;
 }
 
@@ -357,10 +353,10 @@ footer {
     top: 20px;
     right: 35px;
     color: white;
-    font-size: 16px;
+    font-size: 20px;
     font-weight: bold;
     cursor: pointer;
-    text-shadow: 1px 1px 0 #394545, -1px -1px 0 #394545, -1px 1px 0 #000, 1px -1px 0 #394545;
+    text-shadow: 1px 1px 0 #394545, -1px -1px 0 #394545, -1px 1px 0 #394545, 1px -1px 0 #394545;
 }
 
 #caption {
